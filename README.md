@@ -20,6 +20,8 @@ This self-paced course is designed to help you go beyond exam preparation by bui
 
 ## 📘 About This Program
 
+
+
 The AWS Certified Solutions Architect – Associate (SAA-C03) program is designed for aspiring cloud professionals, IT engineers, developers, and architects who want to gain practical AWS skills while preparing for certification.
 
 Unlike traditional video-only courses, this program focuses on learning by doing.
