@@ -28,7 +28,7 @@ Unlike traditional video-only courses, this program focuses on learning by doing
 
 You'll gain hands-on experience designing secure, resilient, high-performing, and cost-optimized AWS architectures using real AWS services and industry best practices.
 
-Throughout the course, you'll build practical skills that can be applied directly in real-world cloud environments.
+Throughout the course, you'll build practical skills that can be applied directly in real-world cloud environments.  
 
 ---
 
