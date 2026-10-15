@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
+import { useTranslation } from "../i18n/LanguageContext";
 
 interface CountdownUnitProps {
   value: string;
@@ -36,6 +37,7 @@ interface TimeLeft {
 }
 
 const CountdownTimer = () => {
+  const { t } = useTranslation();
   const [targetDate] = useState(() => {
     const date = new Date("2025-09-30T23:59:59");
     return date;
@@ -123,33 +125,20 @@ const CountdownTimer = () => {
           className="text-2xl md:text-3xl font-bold"
           style={{ color: "var(--brown)" }}
         >
-          Enter the Contest
+          {t.countdownHeading}
         </h2>
         <p
           className="mt-3 text-sm md:text-base font-semibold max-w-2xl mx-auto"
           style={{ color: "var(--brown-dark)" }}
         >
-          Submit your favorite recipe, and it might be listed on our website!
-          Winner gets featured on our blog!
+          {t.countdownSubtext}
         </p>
 
         <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-4 md:gap-8 mt-8 md:mt-12">
-          <CountdownUnit
-            value={String(timeLeft.days || "0").padStart(2, "0")}
-            label="Days"
-          />
-          <CountdownUnit
-            value={String(timeLeft.hours || "0").padStart(2, "0")}
-            label="Hours"
-          />
-          <CountdownUnit
-            value={String(timeLeft.minutes || "0").padStart(2, "0")}
-            label="Minutes"
-          />
-          <CountdownUnit
-            value={String(timeLeft.seconds || "0").padStart(2, "0")}
-            label="Seconds"
-          />
+          <CountdownUnit value={String(timeLeft.days || "0").padStart(2, "0")} label={t.days} />
+          <CountdownUnit value={String(timeLeft.hours || "0").padStart(2, "0")} label={t.hours} />
+          <CountdownUnit value={String(timeLeft.minutes || "0").padStart(2, "0")} label={t.minutes} />
+          <CountdownUnit value={String(timeLeft.seconds || "0").padStart(2, "0")} label={t.seconds} />
         </div>
       </div>
       <div

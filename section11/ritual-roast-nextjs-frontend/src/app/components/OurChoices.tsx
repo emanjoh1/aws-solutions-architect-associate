@@ -1,6 +1,11 @@
+"use client";
+
 import Image from "next/image";
+import { useTranslation } from "../i18n/LanguageContext";
 
 const OurChoices = () => {
+  const { t } = useTranslation();
+
   const choices = [
     {
       name: "Snacks",
@@ -24,14 +29,13 @@ const OurChoices = () => {
             className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[color:var(--brown)]"
             style={{ fontFamily: "var(--font-montserrat-alternates)" }}
           >
-            Our Choices
+            {t.ourChoicesHeading}
           </h2>
           <p
             className="mt-2 sm:mt-3 text-sm sm:text-base lg:text-lg text-[color:var(--brown-dark)] max-w-2xl mx-auto font-semibold"
             style={{ fontFamily: "var(--font-montserrat-alternates)" }}
           >
-            Elevate your cooking like a pro! Impressive dishes for dates,
-            holidays, and beyond.
+            {t.ourChoicesSubtext}
           </p>
         </div>
         <div className="mt-8 sm:mt-10 md:mt-12 lg:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 md:gap-12 lg:gap-16">

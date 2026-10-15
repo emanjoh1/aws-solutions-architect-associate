@@ -3,9 +3,11 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslation } from "../i18n/LanguageContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { t, locale, setLocale } = useTranslation();
 
   const navLinks = (
     <>
@@ -15,7 +17,7 @@ const Header = () => {
         style={{ color: "var(--brown-dark)" }}
         onClick={() => setIsMenuOpen(false)}
       >
-        Home
+        {t.navHome}
       </Link>
       <Link
         href="/recipes"
@@ -23,7 +25,7 @@ const Header = () => {
         style={{ color: "var(--gold-dark)" }}
         onClick={() => setIsMenuOpen(false)}
       >
-        Recipes
+        {t.navRecipes}
       </Link>
       <Link
         href="/contact"
@@ -31,7 +33,7 @@ const Header = () => {
         style={{ color: "#d47a45" }}
         onClick={() => setIsMenuOpen(false)}
       >
-        Contact
+        {t.navContact}
       </Link>
     </>
   );
@@ -75,8 +77,31 @@ const Header = () => {
                   color: "var(--gold-dark)",
                 }}
               >
-                Login
+                {t.navLogin}
               </button>
+              {/* Language Toggle */}
+              <div className="flex items-center rounded-lg overflow-hidden border" style={{ borderColor: "var(--gold)" }}>
+                <button
+                  onClick={() => setLocale("en")}
+                  className="px-3 py-1 text-sm font-bold transition-colors duration-200"
+                  style={{
+                    backgroundColor: locale === "en" ? "var(--brown-dark)" : "transparent",
+                    color: locale === "en" ? "#fff" : "var(--brown-dark)",
+                  }}
+                >
+                  EN
+                </button>
+                <button
+                  onClick={() => setLocale("fr")}
+                  className="px-3 py-1 text-sm font-bold transition-colors duration-200"
+                  style={{
+                    backgroundColor: locale === "fr" ? "var(--brown-dark)" : "transparent",
+                    color: locale === "fr" ? "#fff" : "var(--brown-dark)",
+                  }}
+                >
+                  FR
+                </button>
+              </div>
               <div className="flex items-center space-x-2">
                 <Link href="#">
                   <Image
@@ -142,8 +167,31 @@ const Header = () => {
             className="px-8 py-3 border rounded-lg text-lg font-semibold"
             style={{ borderColor: "var(--gold)", color: "var(--gold-dark)" }}
           >
-            Login
+            {t.navLogin}
           </button>
+          {/* Language Toggle */}
+          <div className="flex items-center rounded-lg overflow-hidden border" style={{ borderColor: "var(--gold)" }}>
+            <button
+              onClick={() => setLocale("en")}
+              className="px-3 py-2 text-sm font-bold transition-colors duration-200"
+              style={{
+                backgroundColor: locale === "en" ? "var(--brown-dark)" : "transparent",
+                color: locale === "en" ? "#fff" : "var(--brown-dark)",
+              }}
+            >
+              EN
+            </button>
+            <button
+              onClick={() => setLocale("fr")}
+              className="px-3 py-2 text-sm font-bold transition-colors duration-200"
+              style={{
+                backgroundColor: locale === "fr" ? "var(--brown-dark)" : "transparent",
+                color: locale === "fr" ? "#fff" : "var(--brown-dark)",
+              }}
+            >
+              FR
+            </button>
+          </div>
           <div className="flex items-center space-x-4">
             <Link href="#">
               <Image

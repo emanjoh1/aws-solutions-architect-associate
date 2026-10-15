@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat, Montserrat_Alternates } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
+import { LanguageProvider } from "./i18n/LanguageContext";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -43,20 +44,22 @@ export default function RootLayout({
       <body
         className={`${montserrat.variable} ${montserratAlternates.variable} font-montserrat min-h-screen flex flex-col`}
       >
-        <Header />
-        <main className="w-full mx-auto flex-grow">
-          {children}
-        </main>
-        <footer className="w-full flex flex-col sm:flex-row text-[color:var(--brown-dark)]">
-          <div className="flex-grow bg-[color:var(--brown-dark)]"></div>
-          <div
-            className="py-2 sm:py-3 md:py-4 px-4 sm:px-6 md:px-10 text-center text-xs sm:text-sm md:text-base bg-[color:var(--gold)] font-bold"
-            style={{ fontFamily: "var(--font-montserrat-alternates)" }}
-          >
-            Copyrights &copy; Ritual Roast Limited
-          </div>
-          <div className="flex-grow bg-[color:var(--brown-dark)]"></div>
-        </footer>
+        <LanguageProvider>
+          <Header />
+          <main className="w-full mx-auto flex-grow">
+            {children}
+          </main>
+          <footer className="w-full flex flex-col sm:flex-row text-[color:var(--brown-dark)]">
+            <div className="flex-grow bg-[color:var(--brown-dark)]"></div>
+            <div
+              className="py-2 sm:py-3 md:py-4 px-4 sm:px-6 md:px-10 text-center text-xs sm:text-sm md:text-base bg-[color:var(--gold)] font-bold"
+              style={{ fontFamily: "var(--font-montserrat-alternates)" }}
+            >
+              Copyrights &copy; Ritual Roast Limited
+            </div>
+            <div className="flex-grow bg-[color:var(--brown-dark)]"></div>
+          </footer>
+        </LanguageProvider>
       </body>
     </html>
   );

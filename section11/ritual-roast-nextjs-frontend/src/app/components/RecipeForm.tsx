@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslation } from "../i18n/LanguageContext";
 
 interface FormInputProps {
   label: string;
@@ -165,6 +166,7 @@ interface RecipeFormProps {
 }
 
 const RecipeForm: React.FC<RecipeFormProps> = ({ onRecipeSubmitted }) => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -194,17 +196,15 @@ const RecipeForm: React.FC<RecipeFormProps> = ({ onRecipeSubmitted }) => {
 
   const validate = () => {
     const newErrors: { [key: string]: string } = {};
-    if (!formData.name) newErrors.name = "Name cannot be blank.";
+    if (!formData.name) newErrors.name = t.errorName;
     if (!formData.email) {
-      newErrors.email = "Email cannot be blank.";
+      newErrors.email = t.errorEmailBlank;
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Email address is invalid.";
+      newErrors.email = t.errorEmailInvalid;
     }
-    if (!formData.recipe) newErrors.recipe = "Recipe cannot be blank.";
-    if (!formData.ingredients)
-      newErrors.ingredients = "Ingredients cannot be blank.";
-    if (!formData.description)
-      newErrors.description = "Description cannot be blank.";
+    if (!formData.recipe) newErrors.recipe = t.errorRecipe;
+    if (!formData.ingredients) newErrors.ingredients = t.errorIngredients;
+    if (!formData.description) newErrors.description = t.errorDescription;
     return newErrors;
   };
 
@@ -238,7 +238,7 @@ function sleep(ms: number) {
         });
 
         if (res.ok) {
-        alert("Recipe submitted successfully!");
+        alert(t.alertSuccess);
         setFormData({
             name: "",
             email: "",
@@ -256,11 +256,11 @@ function sleep(ms: number) {
           onRecipeSubmitted();
         }
         } else {
-        alert("Failed to submit recipe.");
+        alert(t.alertFail);
         }
     } catch (error) {
         console.error("Submit error:", error);
-        alert("Something went wrong.");
+        alert(t.alertError);
     }
     };
 
@@ -271,72 +271,30 @@ function sleep(ms: number) {
     >
       <div className="text-center mb-10">
         <h2 className="text-3xl font-bold" style={{ color: "var(--brown)" }}>
-          Add your Recipe
+          {t.formHeading}
         </h2>
-        <p
-          className="mt-3 text-base font-semibold"
-          style={{ color: "var(--brown-dark)" }}
-        >
-          Submit your favorite recipe, and it might be listed on our website!
-          <br />
-          Winner gets featured on our blog!
+        <p className="mt-3 text-base font-semibold" style={{ color: "var(--brown-dark)" }}>
+          {t.formSubtext}
         </p>
       </div>
 
       <form className="space-y-6" onSubmit={handleSubmit} noValidate>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <FormInput
-            label="Your Name"
-            id="name"
-            value={formData.name}
-            onChange={handleChange}
-            error={errors.name}
-          />
-          <FormInput
-            label="Your Email"
-            id="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            error={errors.email}
-          />
-          <FormInput
-            label="Your Recipe"
-            id="recipe"
-            value={formData.recipe}
-            onChange={handleChange}
-            error={errors.recipe}
-          />
+          <FormInput label={t.labelName} id="name" value={formData.name} onChange={handleChange} error={errors.name} />
+          <FormInput label={t.labelEmail} id="email" type="email" value={formData.email} onChange={handleChange} error={errors.email} />
+          <FormInput label={t.labelRecipe} id="recipe" value={formData.recipe} onChange={handleChange} error={errors.recipe} />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <FormTextarea
-            label="Recipe Ingredients"
-            id="ingredients"
-            subLabel="(comma-separated)"
-            value={formData.ingredients}
-            onChange={handleChange}
-            error={errors.ingredients}
-            placeholder="E.g. Flour, Sugar, Butter"
-          />
-          <FormTextarea
-            label="Recipe Description"
-            id="description"
-            value={formData.description}
-            onChange={handleChange}
-            error={errors.description}
-            placeholder="Describe how to make the recipe"
-          />
+          <FormTextarea label={t.labelIngredients} id="ingredients" subLabel={t.labelIngredientsHint} value={formData.ingredients} onChange={handleChange} error={errors.ingredients} placeholder={t.placeholderIngredients} />
+          <FormTextarea label={t.labelDescription} id="description" value={formData.description} onChange={handleChange} error={errors.description} placeholder={t.placeholderDescription} />
         </div>
         <div className="flex justify-center pt-4">
           <button
             type="submit"
             className="px-12 py-3 text-base font-bold rounded-lg transition-colors duration-200 hover:opacity-90"
-            style={{
-              backgroundColor: "var(--teal)",
-              color: "#ffffff",
-            }}
+            style={{ backgroundColor: "var(--teal)", color: "#ffffff" }}
           >
-            Submit
+            {t.submitButton}
           </button>
         </div>
       </form>
