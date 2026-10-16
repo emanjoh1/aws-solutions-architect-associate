@@ -5,6 +5,7 @@ import json
 import boto3
 
 
+
 # Get MySQL credentials from AWS Secrets Manager
 def get_mysql_databse_secrets() -> str:
 
